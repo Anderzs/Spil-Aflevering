@@ -1,0 +1,16 @@
+{
+    "GAME_DATA": {
+        "WIDTH": 1100,
+        "HEIGHT": 1000,
+        "FPS": 60
+    },
+    "PLAYER_DATA": {
+        "WIDTH": 50,
+        "HEIGHT": 100,
+        "SPAWN_POS": [100, 100],
+        "SPEED": 8,
+        "JUMP_SPEED": -16,
+        "GRAVITY": 0.8,
+        "color": "black"
+    }
+}
