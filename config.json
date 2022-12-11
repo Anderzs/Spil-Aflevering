@@ -2,14 +2,18 @@
     "GAME_DATA": {
         "WIDTH": 1100,
         "HEIGHT": 1000,
-        "FPS": 60
+        "FPS": 60,
+        "FONT": "AmericanTypewriter.ttc"
     },
     "PLAYER_DATA": {
         "WIDTH": 50,
         "HEIGHT": 100,
-        "SPAWN_POS": [100, 100],
+        "SPAWN_POS": [600, 800],
         "SPEED": 8,
         "JUMP_SPEED": -25,
         "GRAVITY": 0.8
+    },
+    "CAMERA_BORDERS": {
+        "TOP": 300
     }
 }
