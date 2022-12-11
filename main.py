@@ -1,3 +1,8 @@
+#               Hurtigt spil lavet til Programmering C på 3 moduler samlet
+#
+#               Start ide: Basis "Infinite jumper" platformer spil med pygame
+#                          
+
 import pygame
 import sys
 
@@ -26,9 +31,32 @@ class Game:
 
     def check_collisions(self) -> None:
         # Check ground collision
-        if (self.player.sprite.rect.x <= self.map.start_pos[0]):
-            self.player.sprite.rect.x = self.map.start_pos[0]
+        player = self.player.sprite
+        rect = player.rect
 
+        # ----------- GROUND & WINDOW COLLISIONS ----------- #
+
+        if rect.bottom >= self.map.start_pos[1]:
+            rect.bottom = self.map.start_pos[1]
+            player.direction.y = 0.8
+            player.on_ground = True
+
+        if rect.left <= self.map.start_pos[0]:
+            rect.left = self.map.start_pos[0]
+        elif rect.right >= self.width:
+            rect.right = self.map.end_pos[0]
+
+
+        # ----------- PLATFORM COLLISIONS ----------- #
+        for platform in self.map.get_platforms():
+            if platform.rect.colliderect(player.rect) and platform.rect.bottom > player.rect.bottom:
+                if player.direction.y > 0:
+                    rect.bottom = platform.rect.top
+                    player.direction.y = 0
+                    player.on_ground = True
+        #if pygame.sprite.spritecollide(player, self.map.get_platforms(), dokill=False):
+            #if player.direction.y > 0:
+                
 
     def run(self) -> None:
         while True:
@@ -40,11 +68,11 @@ class Game:
 
             self.screen.fill('white')
             
+            self.check_collisions()
             self.player.update()
             self.player.draw(self.screen)
 
             self.map.draw(self.screen)
-            self.check_collisions()
             
             pygame.display.update()
             self.clock.tick(self.fps)
