@@ -21,6 +21,7 @@ class Game:
 
         # ----------- GAME & WINDOW SETTINGS ----------- #
         self.game_status: str = 'waiting'
+        self.score: int = 0
 
         # ----------- GAME & WINDOW SETTINGS ----------- #
         self.clock: pygame.time.Clock = pygame.time.Clock()
@@ -74,6 +75,20 @@ class Game:
                     player.on_ground = True
                 
 
+    def check_platform_creation(self) -> None:
+        player = self.player.sprite
+        rect = player.rect
+
+        if (rect.top) <= self.map.y_pos:
+            self.map.create_platform()
+            self.score += 1
+
+    def display_score(self) -> None:
+        text = self.font.render(f"Score: {self.score}", True, 'black', 'white')
+        text_rect = text.get_rect()
+        text_rect.center = self.game_data['SCORE_POS'][self.game_status]
+        self.screen.blit(text, text_rect)
+
 
     def run(self) -> None:
         while True:
@@ -87,6 +102,7 @@ class Game:
             self.screen.fill('white')
             
             if self.game_status != 'lost':
+                self.check_platform_creation()
                 self.check_collisions()
 
                 self.camera.update()
@@ -99,6 +115,8 @@ class Game:
 
             if self.game_status == 'waiting':
                 self.map.draw_ground(self.screen)
+
+            self.display_score()
             
             pygame.display.update()
             self.clock.tick(self.fps)

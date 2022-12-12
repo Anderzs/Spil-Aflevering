@@ -34,7 +34,10 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
 
     def apply_gravity(self) -> None:
+        if self.direction.y >= 40:
+            self.set_game_status('lost')
         self.direction.y += self.gravity
+        
         self.rect.y += self.direction.y
 
     def update(self) -> None:

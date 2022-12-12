@@ -18,6 +18,9 @@ class Map:
 
         self.add_function = add_function
 
+        # ----------- TRACKING VARIABLES ----------- #
+        self.y_pos: int = self.start_pos[1] + 100 # Height
+
         # ----------- PLATFORMS ----------- #
         self.platforms: pygame.sprite.Group = pygame.sprite.Group()
         self.create_start_platforms()
@@ -27,12 +30,17 @@ class Map:
             
     def create_start_platforms(self) -> None:
         x_pos = 0
-        y_pos = self.start_pos[1] + 100 # Height
         for i in range(3):
-            y_pos -= 300
+            self.y_pos -= 300
             x_pos = randint(0, self.end_pos[0] - 300)
-            self.platforms.add(Platform(pos=(x_pos, y_pos)))
-            self.add_function(Platform(pos=(x_pos, y_pos)))
+            self.platforms.add(Platform(pos=(x_pos, self.y_pos)))
+            self.add_function(Platform(pos=(x_pos, self.y_pos)))
+
+    def create_platform(self) -> None:
+        x_pos = randint(0, self.end_pos[0] - 300)
+        self.y_pos -= 300
+        self.platforms.add(Platform(pos=(x_pos, self.y_pos)))
+        self.add_function(Platform(pos=(x_pos, self.y_pos)))
 
 
     def draw_ground(self, screen: pygame.Surface) -> None:

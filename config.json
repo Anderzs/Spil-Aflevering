@@ -3,7 +3,12 @@
         "WIDTH": 1100,
         "HEIGHT": 1000,
         "FPS": 60,
-        "FONT": "AmericanTypewriter.ttc"
+        "FONT": "AmericanTypewriter.ttc",
+        "SCORE_POS": {
+            "waiting": [160, 70],
+            "running": [160, 70],
+            "lost": [550, 600]
+        }
     },
     "PLAYER_DATA": {
         "WIDTH": 50,
