@@ -1,23 +1,27 @@
-#               Hurtigt spil lavet til Programmering C på 3 moduler samlet
+#               Hurtigt spil lavet til Programmering C
 #
 #               Start ide: Basis "Infinite jumper" platformer spil med pygame
+#               
+#               I fremtiden kunne sprites og assets tilføjes, fjerne collisions i siderne så
+#               man kan eksempelvis kan hoppe gennem højre side af skærmen og komme ind igen i modsatte side
 #                          
 
 import pygame
 import sys
 
 from config import ConfigHandler
-from map import Map, Platform
+from map import Map
 from player import Player
 
 class Game:
     def __init__(self) -> None:
         # ----------- CONFIG ----------- #
         pygame.init()
+        pygame.display.set_caption("Spil Programmering C")
 
         self.config: ConfigHandler = ConfigHandler("config.json")
         self.game_data: dict = self.config.get_data("GAME_DATA")
-        self.font = pygame.font.SysFont("American Typewriter", 64)
+        self.font: pygame.font.Font = pygame.font.SysFont("American Typewriter", 64)
 
         # ----------- GAME & WINDOW SETTINGS ----------- #
         self.game_status: str = 'waiting'
@@ -64,7 +68,6 @@ class Game:
             rect.left = self.map.start_pos[0]
         elif rect.right >= self.width:
             rect.right = self.map.end_pos[0]
-
 
         # ----------- PLATFORM COLLISIONS ----------- #
         for platform in self.map.get_platforms():

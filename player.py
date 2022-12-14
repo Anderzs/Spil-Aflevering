@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.set_game_status = set_game_status
 
         # ----------- MOVEMENT & COLLISION ----------- #
-        self.on_ground: bool = True # Change later
+        self.on_ground: bool = True 
 
     def input(self) -> None:
         key = pygame.key.get_pressed()
